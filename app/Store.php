@@ -12,6 +12,11 @@ class Store extends Model
         // return $this->belongsTo(User::class, 'usuario_id-exemplo'); // nomeclatura fora de padrão
     }
 
+    public function products() // rel 1:N
+    {
+        return $this->hasMany(Product::class);
+    }
+
 }
 
 
