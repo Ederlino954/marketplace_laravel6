@@ -52,6 +52,26 @@ Route::get('/model', function () {
     // return \App\User::where('name', 'Aiden Sawayn')->get(); // select * from where name = 'Margarita Larkin'
     // return \App\User::where('name', 'Leora Prohaska')->first(); // retorna somente o primeiro resultado
 
-    return \App\User::paginate(10); // Paginar dados com laravel
+    // return \App\User::paginate(10); // Paginar dados com laravel
 
+    //------------------------------------------------------
+
+    // Mass Assigment - Atribuição em massa
+
+    // $user = \App\User::create([
+    //     'name' => 'Ederlino',
+    //     'email' => 'ederlino@gmail.com',
+    //     'password' => bcrypt('12345678')
+    // ]);
+    // dd($user);
+
+    // Mass Update
+    // $user = \App\User::find(42);
+    // // $user = $user->update([ // retorna true ou false
+    // $user->update([ // retorna os valo sem ser boleano, retorn acom os atributos
+    //     'name' => 'Atualizando com Mass Update '
+    // ]);
+    // dd($user);
+
+    return \App\User::all();
 });
