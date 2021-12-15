@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    protected $fillable = ['name', 'description', 'slug'];
+
     public function products() // rel N:N // procura tabela pivot pela ordem alfabética dops models category_product
     {
         return $this->belongsToMany(Product::class);
