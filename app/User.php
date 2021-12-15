@@ -33,7 +33,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [ // converte um valo com base nas colunas
+    protected $casts = [ // converte um valor com base nas colunas
         'email_verified_at' => 'datetime',
         // 'name' => 'boolean', // exemplo
     ];
