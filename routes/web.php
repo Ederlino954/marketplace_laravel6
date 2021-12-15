@@ -45,5 +45,13 @@ Route::get('/model', function () {
 
     // return $user->save();
 
-    return \App\User::all();
+
+    // ----------------------------------------
+    // return \App\User::all(); // retorna todos os usuarios - retorna em JSON // Collection, coleções de dados
+    // return \App\User::find(3); // retorna o suaurio com base no id
+    // return \App\User::where('name', 'Aiden Sawayn')->get(); // select * from where name = 'Margarita Larkin'
+    // return \App\User::where('name', 'Leora Prohaska')->first(); // retorna somente o primeiro resultado
+
+    return \App\User::paginate(10); // Paginar dados com laravel
+
 });
