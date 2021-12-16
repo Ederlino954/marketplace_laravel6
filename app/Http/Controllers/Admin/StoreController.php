@@ -14,4 +14,17 @@ class StoreController extends Controller
 
         return view('admin.stores.index', compact('stores'));
     }
+
+    public function create()
+    {
+        $users = \App\User::all(['id', 'name']); // busca com filtro
+
+        return view('admin.stores.create', compact('users'));
+    }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
+
 }
