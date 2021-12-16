@@ -1,6 +1,8 @@
 <h1>Criar Loja</h1>
 
 <form action="/admin/stores/store" method="post">
+    {{-- @csrf --}}
+    <input type="hidden" name="_token" value="{{csrf_token()}}">
 
     <div>
         <label>Nome Loja</label>
@@ -30,7 +32,7 @@
             @endforeach
         </select>
     </div>
-    
+
     <div>
         <button type="submit">Criar Loja</button>
     </div>
