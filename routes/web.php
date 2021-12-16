@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Route::get('/model', function () {
 
+    // --------------------TESTES-----------------------------//
+
 
     // $products = \App\Product::all(); /// select * from products
 
@@ -73,5 +75,90 @@ Route::get('/model', function () {
     // ]);
     // dd($user);
 
+
+    // ------------------------------------------
+    // pegar a loja de um usuário!
+    // $user = \App\User::find(4);
+
+    // return $user->store; // o objeto único  (Store) N:N collection de dados(objeto)
+
+    // dd($user->store()); // instancia de hasOne
+
+    // dd($user->store()->count()); //  contando as lojas do usuario
+    // -------------------------------------
+
+    // Pegar os produtos de uma loja
+    // $loja = \App\Store::find(1);
+
+    // return $loja->products;
+    // return $loja->products()->count(); // colletion return
+    // return $loja->products()->where('id', 1)->get();
+    // dd($loja->products());  // retorn hasMany
+
+    // ---------------------------------------------------------------------------
+    // pegar as categorias de uma loja
+    // $categoria = \App\Category::find(1);
+    // $categoria->products;
+
+    /////============================//=====================================//=======
+
+    // criar uma loja para um usuário
+    // $user = \App\User::find(10);
+    // $store = $user->store()->create([
+    //     'name' => 'Loja teste',
+    //     'description' => 'Loja teste de produtos de informática',
+    //     'mobile_phone' => 'xx-xxxx-xxxx',
+    //     'phone' => 'xx-xxxx-xxxx',
+    //     'slug' => 'loja-teste'
+    // ]);
+    // dd($store);
+
+    // ------------------------------------------------------------------------
+
+    // // criar um produto para uma loja
+
+    // $store = \App\Store::find(41);
+    // $product = $store->products()->create([
+    //     'name' => 'Notebook Dell',
+    //     'description' => 'core I7 16-gigas',
+    //     'body' => 'Qualquer coisa...',
+    //     'price' => '2999.90',
+    //     'slug' => 'notebook-dell',
+    // ]);
+
+    // dd($product);
+
+    // ----------------------------------------------------------------------------
+
+    // criar uma categoria
+
+    // \App\category::create([
+    //     'name' => 'Games',
+    //     'description' => null,
+    //     'slug' => 'games'
+    // ]);
+
+    /// --------------------------------------------------------------------------------
+
+    // \App\category::create([
+
+    //     'name' => 'Notebooks',
+    //     'description' => null,
+    //     'slug' => 'notebooks'
+    // ]);
+
+    // return \App\Category::all();
+
+    // Adicionar um produto para uma categoria ou vice versa
+
+    // $product = \App\Product::find(41);
+
+    // dd($product->categories()->attach([1])); // ADICONA
+    // $product->categories()->attach([1]); // ADICONA
+    // $product->categories()->detach([1]); // REMOVE
+    // dd($product->categories()->sync([1,2])); // adiconou 2
+    // dd($product->categories()->sync([2])); // manteve a 2 e removeu a cat 1
+
     return \App\User::all();
+
 });
