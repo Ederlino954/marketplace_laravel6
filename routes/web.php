@@ -14,9 +14,23 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+
     return view('welcome');
 });
 
+Route::get('/admin/stores', 'Admin\\StoreController@index');
+
+
+
+//Route::get  // pega
+//Route::post // cria
+//Route::put  // atualiza
+//Route::patch  // atualiza
+//Route::delete  // remove
+//Route::options // retorna cabeçalhos correspondentes implementados
+
+
+// -----ROTAS DE TESTE-------//
 Route::get('/model', function () {
 
     // --------------------TESTES-----------------------------//
@@ -159,6 +173,11 @@ Route::get('/model', function () {
     // dd($product->categories()->sync([1,2])); // adiconou 2
     // dd($product->categories()->sync([2])); // manteve a 2 e removeu a cat 1
 
-    return \App\User::all();
+    // -------------------------------------------------------------
+
+    $products = \App\Product::find(41);
+
+    // return $products;
+    return $products->categories;
 
 });
