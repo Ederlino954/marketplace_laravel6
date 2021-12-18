@@ -4,8 +4,9 @@
         <h1>Criar Produto</h1>
 
         <form action="{{route('admin.products.store')}}" method="post">
+            
+            @csrf
 
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="form-group">
                 <label>Nome Produto</label>
                 <input type="text" name="name" class="form-control">
@@ -24,7 +25,7 @@
             <div class="form-group">
                 <label>Preço</label>
                 <input type="text" name="price" class="form-control">
-            </div>            
+            </div>
 
             <div class="form-group">
                 <label>Slug</label>
@@ -33,7 +34,7 @@
 
             <div class="form-group">
                 <label>Lojas</label>
-                <select name="user" class="form-control">
+                <select name="store" class="form-control">
                     @foreach ($stores as $store)
                         <option value="{{$store->id}}">{{$store->name}}</option>
                     @endforeach

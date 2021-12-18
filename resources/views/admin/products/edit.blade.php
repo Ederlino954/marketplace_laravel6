@@ -3,9 +3,10 @@
     @section('content')
         <h1>Atualizar  Produto</h1>
 
-        <form action="{{route('admin.products.store')}}" method="post">
+        <form action="{{route('admin.products.update', ['product' => $product->id] )}}" method="post">
+            @csrf
+            @method('PUT')
 
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="form-group">
                 <label>Nome Produto</label>
                 <input type="text" name="name" class="form-control" value="{{$product->name}}">
@@ -24,16 +25,17 @@
             <div class="form-group">
                 <label>Preço</label>
                 <input type="text" name="price" class="form-control" value="{{$product->price}}">
-            </div>            
+            </div>
 
             <div class="form-group">
                 <label>Slug</label>
             <input type="text" name="slug" class="form-control" value="{{$product->slug}}">
-            </div>        
+            </div>
 
             <div >
                 <button type="submit" class="btn btn-lg btn-success">Atualizar Produto</button>
             </div>
 
         </form>
+
     @endsection
