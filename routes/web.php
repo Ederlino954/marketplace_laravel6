@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 
-Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
+Route::prefix('admin')->name('admin.')->namespace('admin')->group(function(){
 
     Route::prefix('stores')->name('stores.')->group(function(){
 
