@@ -17,13 +17,14 @@
                         <td>{{ $store->name }}</td>
                         <td>
                             <div class="btn-group">
-                                <a href="{{ route('admin.stores.edit', ['store' => $store->id ]) }}" class="btn btn-sm btn-primary">EDITAR</a>
+                                <a href="{{ route('admin.stores.edit', ['store' => $store->id ]) }}"   class="btn btn-sm btn-primary">EDITAR</a>
                                 <form action="{{ route('admin.stores.destroy', ['store' => $store->id ]) }}" method="post">
                                     @csrf
                                     @method("DELETE")
-                                    <button type="submit" class="btn btn-sm btn-danger">Remover</button>
+                                    <button type="submit" onclick="return confirm('Deseja realmente excluir esta loja?')" class="btn btn-sm btn-danger">Remover</button>
                                 </form>
                             </div>
+
                         </td>
                     </tr>
                 @endforeach

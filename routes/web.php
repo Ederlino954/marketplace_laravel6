@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 //Route::options // retorna cabeçalhos correspondentes implementados
 
 
-// -----ROTAS DE TESTE-------//
+// -----INÍCIO ROTAS DE TESTE-------//
 Route::get('/model', function () {
 
     // --------------------TESTES-----------------------------//
@@ -174,12 +174,12 @@ Route::get('/model', function () {
     return $products->categories;
 
 });
+// -----FIM ROTAS DE TESTE-------//
 
 
 Route::get('/', function () {
-
     return view('welcome');
-});
+})->name('home');
 
 
 Route::group(['middleware' => ['auth']], function () {
@@ -207,4 +207,4 @@ Route::group(['middleware' => ['auth']], function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home'); //->middleware('auth');
+// Route::get('/home', 'HomeController@index')->name('home'); //->middleware('auth');
