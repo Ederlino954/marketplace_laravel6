@@ -25,9 +25,9 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $user = auth()->user();
 
-        $user = \App\User::find($data['user']);
-        $store = $user->store()->create($data);
+        $store = $user->store()->create($data); // erro de intellisense, codigo executando/ criando loja para quem está logado!
 
         flash('Loja criada com sucesso!')->success();
         return redirect()->route('admin.stores.index');
