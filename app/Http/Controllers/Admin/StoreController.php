@@ -10,13 +10,18 @@ class StoreController extends Controller
 {
     public function index()
     {
-        $stores = \App\Store::paginate(10);
+        $store = auth()->user()->store; // retornando somente uma loja, controle 1:1
 
-        return view('admin.stores.index', compact('stores'));
+        return view('admin.stores.index', compact('store'));
     }
 
     public function create()
     {
+        if(auth()->user()->store->count()){
+            flash('Voce já possui uma loja!')->warning();
+            return redirect()->route('admin.stores.index');
+        };
+
         $users = \App\User::all(['id', 'name']); // busca com filtro
 
         return view('admin.stores.create', compact('users'));
@@ -24,6 +29,11 @@ class StoreController extends Controller
 
     public function store(StoreRequest $request)
     {
+        if(auth()->user()->store->count()){
+            flash('Voce já possui uma loja!')->warning();
+            return redirect()->route('admin.stores.index');
+        };
+
         $data = $request->all();
         $user = auth()->user();
 

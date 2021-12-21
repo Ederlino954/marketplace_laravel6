@@ -1,17 +1,20 @@
 @extends('layouts.app')
 
     @section('content')
-        <a href="{{ route('admin.stores.create') }}" class="btn btn-lg btn-success">Criar Loja</a>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Loja</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($stores as $store)
+
+        @if (!$store)
+            <a href="{{ route('admin.stores.create') }}" class="btn btn-lg btn-success">Criar Loja</a>
+        @else ($store)
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Loja</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+
                     <tr>
                         <td>{{ $store->id }}</td>
                         <td>{{ $store->name }}</td>
@@ -27,10 +30,9 @@
 
                         </td>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
 
-        {{ $stores->links() }}
+                </tbody>
+            </table>
+        @endif
 
     @endsection
