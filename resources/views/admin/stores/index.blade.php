@@ -21,7 +21,7 @@
                                 <form action="{{ route('admin.stores.destroy', ['store' => $store->id ]) }}" method="post">
                                     @csrf
                                     @method("DELETE")
-                                    <button type="submit" onclick="return confirm('Deseja realmente excluir esta loja?')" class="btn btn-sm btn-danger">Remover</button>
+                                    <button type="submit" onclick="return confirm('Deseja realmente remover esta loja?')" class="btn btn-sm btn-danger">Remover</button>
                                 </form>
                             </div>
 
