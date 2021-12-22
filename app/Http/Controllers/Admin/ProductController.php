@@ -5,21 +5,24 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
-use App\Http\Requests\ProductRequest;
+use App\http\requests\ProductRequest; // regras de validações
 
 class ProductController extends Controller
 {
     private $product;
 
-    public function __construct(Product  $product) {
+    public function __construct(Product $product)
+    {
         $this->product = $product;
     }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() // lista os dados
     {
         $products = $this->product->paginate(10);
 
@@ -31,11 +34,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create() // criar os forms
     {
-        $stores = \App\Store::all(['id', 'name']);
+        $categories = \App\Category::all(['id', 'name']);
 
-        return view('admin.products.create', compact('stores'));
+        return view('admin.products.create', compact('categories'));
     }
 
     /**
@@ -44,14 +47,16 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
+    public function store(ProductRequest $request) // procesamento da criação //ProductRequest = regras de validaões sendo usadas
     {
         $data = $request->all();
 
-        $store = auth()->user()->store; 
-        $store->products()->create($data);
+        $store = auth()->user()->store;
+        $product = $store->products()->create($data);
 
-        flash('Produto criado com sucesso!')->success();
+        $product->categories()->sync($data['categories']);
+
+        flash('Produto Criado com sucesso!')->success();
         return redirect()->route('admin.products.index');
     }
 
@@ -61,9 +66,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) // visualização específica
     {
-
+        return $id;
     }
 
     /**
@@ -72,11 +77,12 @@ class ProductController extends Controller
      * @param  int  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit($product)
+    public function edit($product) // edição
     {
-        $product = $this->product->findOrFail($product);
+        $product = $this->product->findOrFail($product); //findOrFail caso produto não exista
+        $categories = \App\Category::all(['id', 'name']);
 
-        return view('admin.products.edit', compact('product'));
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -86,14 +92,14 @@ class ProductController extends Controller
      * @param  int  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductRequest $request, $product)
+    public function update(ProductRequest $request, $product)  // atualização //ProductRequest = regras de validaões sendo usadas
     {
         $data = $request->all();
 
-        $product = $this->product->findOrFail($product);
+        $product = $this->product->find($product);
         $product->update($data);
 
-        flash('Produto atualizado com sucesso!')->success();
+        flash('Produto Atualizado com sucesso!')->success();
         return redirect()->route('admin.products.index');
     }
 
@@ -103,12 +109,12 @@ class ProductController extends Controller
      * @param  int  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy($product)
+    public function destroy($product) // deletar
     {
-        $product = $this->product->findOrFail($product);
+        $product = $this->product->find($product);
         $product->delete();
 
-        flash('Produto removido com sucesso!')->success();
+        flash('Produto Removido com sucesso!')->success();
         return redirect()->route('admin.products.index');
     }
 }
