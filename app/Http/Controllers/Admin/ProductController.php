@@ -48,8 +48,16 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request) // procesamento da criação //ProductRequest = regras de validaões sendo usadas
+    public function store(Request $request) // procesamento da criação //ProductRequest = regras de validaões sendo usadas
     {
+        $images = $request->file('photos');
+
+        foreach ($images as $image) {
+            print  $image->store('products', 'public') . '<br>';
+        }
+
+        dd('OK upload');
+
         $data = $request->all();
 
         $store = auth()->user()->store;
