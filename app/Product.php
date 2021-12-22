@@ -16,9 +16,15 @@ class Product extends Model
     public function categories() // rel N:N // procura tabela pivot pela ordem alfabética dops models category_product
     {
         return $this->belongsToMany(Category::class);
-        // return $this->belongsToMany(Category::class, 'products_categories'); /// nomeclatura fora de padrão para encontar a tabela pivot
+    }
+
+    public function photos()
+    {
+        return $this->hasMany(ProductPhoto::class);
     }
 }
+
+// return $this->belongsToMany(Category::class, 'products_categories'); /// nomeclatura fora de padrão para encontar a tabela pivot
 
 // 1:1 - Um pra um (Usuário e loja) hasOne e belongsTo
 // 1:N - Um pra Muitos (Loja e Produtos) hasMany e belongsTo

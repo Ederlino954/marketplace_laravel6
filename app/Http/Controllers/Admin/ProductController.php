@@ -48,22 +48,20 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) // procesamento da criação //ProductRequest = regras de validaões sendo usadas
+    public function store(ProductRequest $request) // procesamento da criação //ProductRequest = regras de validaões sendo usadas
     {
-        $images = $request->file('photos');
-
-        foreach ($images as $image) {
-            print  $image->store('products', 'public') . '<br>';
-        }
-
-        dd('OK upload');
-
         $data = $request->all();
 
         $store = auth()->user()->store;
         $product = $store->products()->create($data);
 
         $product->categories()->sync($data['categories']);
+
+        if ($request->hasFile('photos')) {
+            $images = $this->imageUpload($request, 'image');
+
+            $product->photos()->createMany($images);
+        }
 
         flash('Produto Criado com sucesso!')->success();
         return redirect()->route('admin.products.index');
@@ -127,4 +125,18 @@ class ProductController extends Controller
         flash('Produto Removido com sucesso!')->success();
         return redirect()->route('admin.products.index');
     }
+
+    private function imageUpload(Request $request, $imageColumn)
+    {
+        $images = $request->file('photos');
+
+        $uploadedImages = [];
+
+        foreach ($images as $image) {
+            $uploadedImages[] =  [$imageColumn => $image->store('products', 'public')];
+        }
+
+        return $uploadedImages;
+    }
+
 }
