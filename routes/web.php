@@ -177,9 +177,7 @@ Route::get('/model', function () {
 // -----FIM ROTAS DE TESTE-------//
 
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 
 Route::group(['middleware' => ['auth']], function () {
