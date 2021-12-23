@@ -36,7 +36,7 @@ class StoreController extends Controller
         $user = auth()->user();
 
         if ($request->hasFile('logo')) {
-            $data['logo'] = $this->imageUpload($request);
+            $data['logo'] = $this->imageUpload($request->file('logo'));
         }
 
         $store = $user->store()->create($data); // erro de intellisense, codigo executando/ criando loja para quem está logado!
