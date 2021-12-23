@@ -65,7 +65,13 @@
 
         <div class="form-group">
             <label>Fotos do Produto</label>
-            <input type="file" name="photos[]" class="form-control" multiple>
+            <input type="file" name="photos[]" class="form-control @error('photos') is-invalid @enderror" multiple>
+
+            @error('photos')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+            @enderror
         </div>
 
         <div class="form-group">
@@ -87,7 +93,7 @@
                 <form action="{{ route('admin.photo.remove')}}" method="post" >
                     @csrf
                     <input type="hidden" name="photoName" value="{{$photo->image}}">
-                    
+
                     <button type="submit" onclick="return confirm('Deseja realmente remover esta imagem?')" class="btn btn-lg btn-danger">REMOVER</button>
                 </form>
             </div>
