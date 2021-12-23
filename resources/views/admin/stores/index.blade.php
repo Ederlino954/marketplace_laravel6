@@ -4,9 +4,7 @@
 
         @if (!$store)
             <a href="{{ route('admin.stores.create') }}" class="btn btn-lg btn-success">Criar Loja</a>
-        @endif
-
-        @if ($store)
+        @else
             <table class="table table-striped">
                 <thead>
                     <tr>
