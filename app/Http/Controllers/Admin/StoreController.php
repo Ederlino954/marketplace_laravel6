@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreRequest;
+use App\http\requests\StoreRequest; // regras de validações
 use App\Traits\UploadTrait;
+use Illuminate\Support\Facades\Storage;
 
 class StoreController extends Controller
 {
@@ -18,19 +19,20 @@ class StoreController extends Controller
 
     public function index()
     {
-        $store = auth()->user()->store; // retornando somente uma loja, controle 1:1
+        $store = auth()->user()->store;
 
-        return view('admin.stores.index', compact('store'));
+        return view('admin.stores.index', compact('store') );
     }
 
     public function create()
     {
-        $users = \App\User::all(['id', 'name']); // busca com filtro
+
+        $users = \App\User::all(['id', 'name']);
 
         return view('admin.stores.create', compact('users'));
     }
 
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request) //StoreRequest = regras de validaões sendo usadas
     {
         $data = $request->all();
         $user = auth()->user();
@@ -39,9 +41,9 @@ class StoreController extends Controller
             $data['logo'] = $this->imageUpload($request->file('logo'));
         }
 
-        $store = $user->store()->create($data); // erro de intellisense, codigo executando/ criando loja para quem está logado!
+        $store = $user->store()->create($data);
 
-        flash('Loja criada com sucesso!')->success();
+        flash('Loja Criada com sucesso!')->success();
         return redirect()->route('admin.stores.index');
     }
 
@@ -52,11 +54,20 @@ class StoreController extends Controller
         return view('admin.stores.edit', compact('store'));
     }
 
-    public function update(StoreRequest $request, $store)
+    public function update(StoreRequest $request, $store) //StoreRequest = regras de validaões sendo usadas
     {
         $data = $request->all();
-
         $store = \App\Store::find($store);
+
+        if ($request->hasFile('logo')) {
+            if (Storage::disk('public')->exists($store->logo)) {
+                Storage::disk('public')->delete($store->logo);
+            }
+
+            $data['logo'] = $this->imageUpload($request->file('logo'));
+        }
+
+
         $store->update($data);
 
         flash('Loja Atualizada com sucesso!')->success();
@@ -71,5 +82,7 @@ class StoreController extends Controller
         flash('Loja Removida com sucesso!')->success();
         return redirect()->route('admin.stores.index');
     }
+
+
 
 }
