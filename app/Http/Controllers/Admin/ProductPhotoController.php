@@ -20,7 +20,7 @@ class ProductPhotoController extends Controller
 
         // Removo a imagem do banco
         $removePhoto = ProductPhoto::where('image', $photoName);
-        
+
         $productId = $removePhoto->first()->product_id;
 
         $removePhoto->delete();
@@ -28,4 +28,7 @@ class ProductPhotoController extends Controller
         flash('Imagem removida com sucesso')->success();
         return redirect()->route('admin.products.edit', ['product' => $productId]);
     }
+
+    
+
 }

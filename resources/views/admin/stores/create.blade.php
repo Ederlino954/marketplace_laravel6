@@ -3,7 +3,7 @@
     @section('content')
         <h1>Criar Loja</h1>
 
-        <form action="{{route('admin.stores.store')}}" method="post">
+        <form action="{{route('admin.stores.store')}}" method="post" enctype="multipart/form-data">
 
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="form-group">
@@ -52,6 +52,11 @@
                     </div>
                 @enderror
 
+            </div>
+
+            <div class="form-group">
+                <label>Fotos do Produto</label>
+                <input type="file" name="logo" class="form-control">
             </div>
 
             <div class="form-group">
