@@ -8,24 +8,24 @@ class CartController extends Controller
 {
     public function index()
     {
-        dd(session()->get('cart'));
+        $cart = session()->has('cart') ? session()->get('cart') : [] ;
+
+        return view('cart', compact('cart'));
     }
 
     public function add(Request $request)
     {
         $product = $request->get('product');
 
+        // verificar se existe sessão para os produtos
         if (session()->has('cart')) {
-
             session()->push('cart', $product);
-
         } else {
             $products[] = $product;
-
-            session()->put('cart', $product);
+            session()->put('cart', $products);
         }
 
-        flash('Produto adicionado ao carrinho!')->success();
-        return redirect()->route('product.single', ['slug' => $product['slug']]);
+        flash('Produto Adicionado no carrinho!')->success();
+        return redirect()->route('product.single', ['slug' => $product['slug'] ]);
     }
 }
