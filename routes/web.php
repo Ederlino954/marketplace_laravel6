@@ -15,13 +15,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
-//Route::get  // pega
-//Route::post // cria
-//Route::put  // atualiza
-//Route::patch  // atualiza
-//Route::delete  // remove
-//Route::options // retorna cabeçalhos correspondentes implementados
-
 
 // -----INÍCIO ROTAS DE TESTE-------//
 Route::get('/model', function () {
@@ -178,7 +171,7 @@ Route::get('/model', function () {
 
 
 Route::get('/', 'HomeController@index')->name('home');
-
+Route::get('/product/{slug}', 'HomeController@single')->name('product.single');
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -207,4 +200,13 @@ Route::group(['middleware' => ['auth']], function () {
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home'); //->middleware('auth');
+
+
+//Route::get  // pega
+//Route::post // cria
+//Route::put  // atualiza
+//Route::patch  // atualiza
+//Route::delete  // remove
+//Route::options // retorna cabeçalhos correspondentes implementados
+
+
