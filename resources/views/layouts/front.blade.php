@@ -72,7 +72,7 @@
                                 <i class="fa fa-shopping-cart fa-2x"></i>
                             </a>
                         </li>
-                        
+
                     </ul>
                 </div>
         {{-- @endauth --}}
@@ -84,5 +84,6 @@
     @include('flash::message')
     @yield('content')
 </div>
+    @yield('scripts')
 </body>
 </html>
