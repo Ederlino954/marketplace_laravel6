@@ -115,7 +115,6 @@ class CheckoutController extends Controller
         );
 
         var_dump($result);
-
     }
 
     private function makePagseguroSession()

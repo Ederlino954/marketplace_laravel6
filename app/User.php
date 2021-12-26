@@ -43,6 +43,11 @@ class User extends Authenticatable
         return $this->hasOne(Store::class);
         // return $this->hasOne(Store::class, 'usuario_id-exemplo'); // nomeclatura fora de padrão
     }
+
+    public function orders()
+    {
+        return $this->hasMany(UserOrder::class);
+    }
 }
 
 
