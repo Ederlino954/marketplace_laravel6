@@ -32,7 +32,7 @@ class CheckoutController extends Controller
 
         $creditCard = new \PagSeguro\Domains\Requests\DirectPayment\CreditCard();
 
-        $creditCard->setReceiverEmail('PAGSEGURO_EMAIL');
+        $creditCard->setReceiverEmail(env('PAGSEGURO_EMAIL'));
         $creditCard->setReference($reference);
         $creditCard->setCurrency("BRL");
 
@@ -49,7 +49,7 @@ class CheckoutController extends Controller
         }
 
         $user = auth()->user();
-        $email = env('PAGSEGURO_ENV') == 'sandbox' ? 'text@sandbox.pagseguro.com.br' : [];
+        $email = env('PAGSEGURO_ENV') == 'sandbox' ? 'test@sandbox.pagseguro.com.br' : $user->email;
 
         $creditCard->setSender()->setName($user->name);
         $creditCard->setSender()->setEmail($email);
@@ -60,7 +60,7 @@ class CheckoutController extends Controller
 
         $creditCard->setSender()->setDocument()->withParameters(
             'CPF',
-            '58139384780'
+            '27121238918'
         );
 
         $creditCard->setSender()->setHash($dataPost['hash']);
@@ -105,7 +105,7 @@ class CheckoutController extends Controller
 
         $creditCard->setHolder()->setDocument()->withParameters(
             'CPF',
-            '58139384780'
+            '27121238918'
         );
 
         $creditCard->setMode('DEFAULT');
@@ -123,7 +123,7 @@ class CheckoutController extends Controller
             'store_id' => 42
         ];
 
-        $user->order()->create($userOrder);
+        $user->orders()->create($userOrder);
 
         return response()->json([
             'data' => [

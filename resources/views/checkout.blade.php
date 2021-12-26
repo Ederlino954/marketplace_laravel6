@@ -123,7 +123,7 @@
                     data: data,
                     dataType: "json",
                     success: function (res) {
-                        alert(res.data.message)
+                        alert(res.data.message);
                     }
                 });
             }
