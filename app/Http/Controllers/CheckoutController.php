@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\List_;
 
 class CheckoutController extends Controller
 {
@@ -14,9 +15,13 @@ class CheckoutController extends Controller
         }
         $this->makePagseguroSession();
 
-        var_dump(session()->get('pagseguro_session_code'));
+        $cartItems = array_map(function($line){
+            return $line['amount'] * $line['price'];
+        }, session()->get('cart'));
 
-        return view('checkout');
+        $cartItems = array_sum($cartItems);
+
+        return view('checkout', compact('cartItems'));
     }
 
     public function proccess(Request $request)
@@ -73,7 +78,6 @@ class CheckoutController extends Controller
             'apto. 114'
         );
 
-
         $creditCard->setBilling()->setAddress()->withParameters(
             'Av. Brig. Faria Lima',
             '1384',
@@ -87,6 +91,8 @@ class CheckoutController extends Controller
 
         $creditCard->setToken($dataPost['card_token']);
         list($quantity, $installmentAmount) = explode('│', $dataPost['installment']);
+
+        $installmentAmount = number_format($installmentAmount, 2, '.', '');
 
         $creditCard->setInstallment()->withParameters($quantity, $installmentAmount);
 
