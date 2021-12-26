@@ -36,10 +36,10 @@ class CheckoutController extends Controller
         $creditCard->setReference($reference);
         $creditCard->setCurrency("BRL");
 
-        $cartItens = session()->get('cart');
+        $cartItems = session()->get('cart');
 
 
-        foreach ($cartItens as $item) {
+        foreach ($cartItems as $item) {
             $creditCard->addItems()->withParameters(
                 $reference,
                 $item['name'],
@@ -90,7 +90,7 @@ class CheckoutController extends Controller
         );
 
         $creditCard->setToken($dataPost['card_token']);
-        list($quantity, $installmentAmount) = explode('│', $dataPost['installment']);
+        list($quantity, $installmentAmount) = explode('|', $dataPost['installment']);
 
         $installmentAmount = number_format($installmentAmount, 2, '.', '');
 
@@ -115,6 +115,22 @@ class CheckoutController extends Controller
         );
 
         var_dump($result);
+        $userOrder = [
+            'reference' => $reference,
+            'pagseguro_code' => $result->getCode(),
+            'pagseguro_status' => $result->getStatus(),
+            'items' => serialize($cartItems),
+            'store_id' => 42
+        ];
+
+        $user->order()->create($userOrder);
+
+        return response()->json([
+            'data' => [
+                'status' => true,
+                'message' => 'Pedido criado com suceso!'
+            ]
+        ]);
     }
 
     private function makePagseguroSession()
