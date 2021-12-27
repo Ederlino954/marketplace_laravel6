@@ -2,7 +2,7 @@
 
 
 @section('content')
-
+    
     <a href="{{route('admin.categories.create')}}" class="btn btn-lg btn-success">Criar Categoria</a>
 
     <table class="table table-striped">

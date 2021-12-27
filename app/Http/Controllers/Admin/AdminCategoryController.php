@@ -6,7 +6,7 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 
-class CategoryController extends Controller
+class AdminCategoryController extends Controller
 {
 	/**
 	 * @var Category
