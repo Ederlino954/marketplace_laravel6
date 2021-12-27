@@ -27,30 +27,52 @@ class CheckoutController extends Controller
 
     public function proccess(Request $request)
     {
-        $dataPost = $request->all();
-        $user = auth()->user();
-        $cartItems = session()->get('cart');
-        $reference = 'XPTO';
+        try {
 
-        $creditCardPayment = new CreditCard($cartItems, $user, $dataPost, $reference);
-        $result = $creditCardPayment->doPayment();
+            $dataPost = $request->all();
+            $user = auth()->user();
+            $cartItems = session()->get('cart');
+            $reference = 'XPTO';
 
-        $userOrder = [
-            'reference' => $reference,
-            'pagseguro_code' => $result->getCode(),
-            'pagseguro_status' => $result->getStatus(),
-            'items' => serialize($cartItems),
-            'store_id' => 42
-        ];
+            $creditCardPayment = new CreditCard($cartItems, $user, $dataPost, $reference);
+            $result = $creditCardPayment->doPayment();
 
-        $user->orders()->create($userOrder);
+            $userOrder = [
+                'reference' => $reference,
+                'pagseguro_code' => $result->getCode(),
+                'pagseguro_status' => $result->getStatus(),
+                'items' => serialize($cartItems),
+                'store_id' => 42
+            ];
 
-        return response()->json([
-            'data' => [
-                'status' => true,
-                'message' => 'Pedido criado com suceso!'
-            ]
-        ]);
+            $user->orders()->create($userOrder);
+
+            session()->forget('cart');
+            session()->forget('pagseguro_session_code');
+
+            return response()->json([
+                'data' => [
+                    'status' => true,
+                    'message' => 'Pedido criado com suceso!',
+                    'order' => $reference
+                ]
+            ]);
+
+        } catch (\Exception $e) {
+            $message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar pedido!';
+
+            return response()->json([
+                'data' => [
+                    'status' => false,
+                    'message' => $message
+                ]
+            ], 401);
+        }
+    }
+
+    public function thanks()
+    {
+        return view('thanks');
     }
 
     private function makePagseguroSession()
