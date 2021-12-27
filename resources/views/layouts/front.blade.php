@@ -26,9 +26,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item @if(request()->is('/')) active @endif">
+            {{-- <li class="nav-item @if(request()->is('/')) active @endif">
                 <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
-            </li>
+            </li> --}}
 
             @foreach ($categories as $category)
                 <li class="nav-item">
