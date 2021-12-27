@@ -14,6 +14,9 @@ class CheckoutController extends Controller
         if(!auth()->check()) {
             return redirect()->route('login');
         }
+
+        if(!session()->has('cart')) return redirect()->route('home');
+        
         $this->makePagseguroSession();
 
         $cartItems = array_map(function($line){
