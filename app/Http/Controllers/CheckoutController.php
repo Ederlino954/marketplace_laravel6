@@ -16,7 +16,7 @@ class CheckoutController extends Controller
         }
 
         if(!session()->has('cart')) return redirect()->route('home');
-        
+
         $this->makePagseguroSession();
 
         $cartItems = array_map(function($line){
@@ -48,7 +48,9 @@ class CheckoutController extends Controller
                 'store_id' => 42
             ];
 
-            $user->orders()->create($userOrder);
+            $userOrder = $user->orders()->create($userOrder);
+            
+            $userOrder->stores()->sync($stores);
 
             session()->forget('cart');
             session()->forget('pagseguro_session_code');
