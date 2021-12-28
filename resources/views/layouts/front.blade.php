@@ -68,6 +68,11 @@
                             <li class="nav-item">
                                 <span class="nav-link">{{auth()->user()->name}}</span>
                             </li>
+
+
+                            <li class="nav-item @if(request()->is('my-orders*')) active @endif">
+                                <a href="{{ route('user.orders') }}" class="nav-link">Meus Pedidos</a>
+                            </li>
                         @endauth
 
                         <li class="nav-item">
@@ -91,6 +96,10 @@
     @include('flash::message')
     @yield('content')
 </div>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     @yield('scripts')
 </body>
 </html>
