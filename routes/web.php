@@ -14,8 +14,6 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-
-
 // -----INÍCIO ROTAS DE TESTE-------//
 Route::get('/model', function () {
 
@@ -209,6 +207,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('categories', 'AdminCategoryController');
 
         Route::post('photos/remove', 'ProductPhotoController@removePhoto')->name('photo.remove');
+
+        Route::get('orders/my', 'OrdersController@index');
     });
 
 });
