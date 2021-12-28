@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Marketplace L6</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"></head>
+
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 40px">
@@ -20,8 +21,11 @@
             @auth
 
                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item @if (request()->is('admin/orders*')) active @endif">
+                    <a class="nav-link" href="{{ route('admin.orders.my') }}">Meus pedidos</span></a>
+                    </li>
                     <li class="nav-item @if (request()->is('admin/stores*')) active @endif">
-                    <a class="nav-link" href="{{ route('admin.stores.index') }}">Lojas <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ route('admin.stores.index') }}">Loja <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item @if (request()->is('admin/products*')) active @endif">
                     <a class="nav-link" href="{{ route('admin.products.index') }}">Produtos</a>
@@ -56,5 +60,11 @@
         @include('flash::message')
         @yield('content')
     </div>
+    <script
+            src="http://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
