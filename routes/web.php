@@ -228,3 +228,41 @@ Auth::routes();
 //Route::options // retorna cabeçalhos correspondentes implementados
 
 
+//teste
+
+Route::get('not', function() {
+    // $user = \App\User::find(40);
+    // $user->notify(new \App\Notifications\StoreReceiveNewOrder());
+
+    // $notification = $user->notifications->first();
+    // $notification->markAsRead();
+
+    // $notification = $user->unreadNotifications->first();
+    // $notification->markAsRead();
+
+    $stores = [43, 41, 30];
+
+    $stores = \App\Store::whereIn('id',$stores)->get();
+
+    return $stores->map(function($store) {
+        return get_class($store->user);
+    });
+
+
+    // return $stores->map(function($store) {
+    //     return $store->user;
+    // });
+
+    // return $stores->each(function($store) {
+    //     return $store->user;
+    // });
+
+
+    // return $stores;
+
+
+    // return $user->unreadNotifications->count();
+    // return $user->readNotifications->count();
+    // return $user->readNotifications;
+    // return $user->notifications;
+});
