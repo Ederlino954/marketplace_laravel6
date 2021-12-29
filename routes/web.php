@@ -193,6 +193,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('admin')->name('admin.')->namespace('admin')->group(function(){
 
+        Route::get('notifications', 'NotificationController@notifications')->name('notifications.index');
+        Route::get('notifications/read-all', 'NotificationController@readAll')->name('notifications.read.all');
+
         // Route::prefix('stores')->name('stores.')->group(function(){
 
         //     Route::get('/', 'StoreController@index')->name('index');
@@ -228,7 +231,7 @@ Auth::routes();
 //Route::options // retorna cabeçalhos correspondentes implementados
 
 
-/////////////////////////rota de teste/////////////////////////////
+// -----INÍCIO ROTAS DE TESTE-------//
 Route::get('not', function() {
     // $user = \App\User::find(40);
     // $user->notify(new \App\Notifications\StoreReceiveNewOrder());
@@ -255,7 +258,7 @@ Route::get('not', function() {
     //     return $store->user;
     // });
 
-    return $user->readNotifications->count();
+    // return $user->readNotifications->count();
 
     // return $stores;
 
@@ -264,3 +267,4 @@ Route::get('not', function() {
     // return $user->readNotifications;
     // return $user->notifications;
 });
+// -----FIM ROTAS DE TESTE-------//
