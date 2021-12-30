@@ -24,14 +24,15 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => ['required', 'unique:categories']
         ];
     }
 
     public function messages()
     {
 		return [
-			'required' => 'Este campo é obrigatório!'
+			'required' => 'Este campo é obrigatório!',
+			'unique' => 'Categoria existente!',
 		];
     }
 }
