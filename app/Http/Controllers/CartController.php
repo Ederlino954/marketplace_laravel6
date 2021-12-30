@@ -18,7 +18,7 @@ class CartController extends Controller
 
         $product = \App\Product::whereSlug($productData['slug']);
 
-        if(!$product->count() OR $productData['amount'] == 0)
+        if(!$product->count() OR $productData['amount'] <= 0)
             return redirect()->route('home');
             // return redirect()->route('product.single', ['slug' => $productData['slug']]);
 
