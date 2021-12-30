@@ -7,6 +7,10 @@ function filterItemsByStoreId(array $items, $storeId)
     });
 }
 
-
+function formatPriceToDatabase($price)
+{
+    // 19,90 -> 19.90 ou 1.111,11 -> 1111,11
+    return str_replace(['.', ','],['', '.'], $price);
+}
 
 

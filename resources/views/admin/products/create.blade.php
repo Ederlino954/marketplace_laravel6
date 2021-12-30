@@ -80,6 +80,7 @@
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/gh/plentz/jquery-maskmoney@master/dist/jquery.maskMoney.min.js"></script>
     <script>
-        $('#price').maskMoney( {prefix: 'R$ ', allowNegative: false, thousands: '.', decimal: ',' });
+        // $('#price').maskMoney( {prefix: 'R$ ', allowNegative: false, thousands: '.', decimal: ',' });
+        $('#price').maskMoney( { allowNegative: false, thousands: '.', decimal: ',' });
     </script>
 @endsection
