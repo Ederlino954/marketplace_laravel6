@@ -93,13 +93,15 @@ class CheckoutController extends Controller
             $notification = new Notification();
             $notification = $notification->getTransaction();
 
-            $userOrder = UserOrder::whereReference($notification->getReference());
+            $reference = base64_decode($notification->getReference());
+
+            $userOrder = UserOrder::whereReference($reference);
             $userOrder->update([
                 'pagseguro_status' => $notification->getStatus()
             ]);
 
             if($notification->getStatus() == 3){
-                // Liberar o pedido do usuário...; atualizar o status do pesido para separação
+                // Liberar o pedido do usuário...; atualizar o status do pedido para separação
                 // Notificar o usuário que o pedido foi pago...
                 // Notificar a loja da confirmação do pedido...
             }
