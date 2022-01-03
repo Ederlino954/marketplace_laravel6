@@ -36,8 +36,11 @@
             @endforeach
 
         </div>
-        <div class="col-12">
+
+        <div class="col-12 mb-4">
+
             {{$products->links()}}
+
         </div>
 
 
@@ -62,6 +65,11 @@
                     <a href="{{ route('store.single', ['slug' => $store->slug]) }}" class="btn btn-sm btn-success">Ver Loja</a>
                 </div>
             @endforeach
+        </div>
+
+        <div class="col-12">
+            <hr>
+            {{$stores->links()}}
         </div>
 
 

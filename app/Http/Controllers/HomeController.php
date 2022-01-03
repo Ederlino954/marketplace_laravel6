@@ -34,7 +34,8 @@ class HomeController extends Controller
     {
         // $products = $this->product->limit(6)->orderBy('id', 'DESC')->get();
         $products = $this->product->orderBy('id', 'DESC')->paginate(9);
-        $stores = \App\Store::limit(12)->orderBy('id', 'DESC')->get();
+        // $stores = \App\Store::limit(12)->orderBy('id', 'DESC')->get();
+        $stores = \App\Store::orderBy('id', 'DESC')->paginate(9);
 
         return view('welcome', compact('products', 'stores'));
     }
