@@ -53,3 +53,21 @@ function drawSelectInstallments(installments) {
 
     return select;
 }
+
+function showErrorMessages(message)
+{
+    return `
+        <div classe="alert alert-danger">${message}</div>
+    `;
+}
+
+function errorsMapPagseguro(code)
+{
+    switch (code) {
+        case 10000:
+            break;
+
+        default:
+            break;
+    }
+}
