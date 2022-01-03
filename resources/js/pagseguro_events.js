@@ -39,8 +39,8 @@ submitButton.addEventListener('click', function(event){
         error: function(err) {
             console.log(err.errors);
 
-            for (let i in err.errors) {
-                console.log(i);
+            for(let i in err.errors) {
+                document.querySelector('div.msg').innerHTML = showErrorMessages(errorsMapPagseguroJS(i));
             }
         }
     });
