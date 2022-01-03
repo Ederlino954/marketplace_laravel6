@@ -16,6 +16,10 @@ function proccessPayment(token)
         success: function (res) {
             toastr.success(res.data.message, 'Sucesso');
             window.location.href = `${urlThanks}?order=${res.data.order}`;
+        },
+        error: function (err) {
+            let message = JSON.parse(err.responseText);
+            document.querySelector('div.msg').innerHTML= showErrorMessages(message.data.message.error.message);
         }
     });
 }
