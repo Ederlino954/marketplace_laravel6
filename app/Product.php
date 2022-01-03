@@ -3,43 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-// use Spatie\Sluggable\HasSlug;
-// use Spatie\Sluggable\SlugOptions;
-use Illuminate\Support\Str;
+use App\Traits\Slug;
 
 class Product extends Model
 {
-    // use HasSlug;
+    use Slug;
 
     protected $fillable = ['name', 'description', 'body', 'price', 'slug'];
 
-    // public function getSlugOptions() : SlugOptions
-    // {
-    //     return SlugOptions::create()
-    //         ->generateSlugsFrom('name')
-    //         ->saveSlugsTo('slug');
-    // }
     // Accessor = full_name -> getFullNameAttribute = exemplo de nomeação
     public function getThumbAttribute() // Accessor
     {
         return $this->photos->first()->image;
     }
-// ->slug = 123232
-    public function setNameAttribute($value) // mutators
-    {
-        $slug = Str::slug($value);
-        $matchs = $this->uniqueSlug($slug);
 
-        $this->attributes['name'] = $value;
-        $this->attributes['slug'] = $matchs ? $slug . '-' . $matchs : $slug;
-    }
-
-    public function uniqueSlug($slug)
-    {
-        $matchs = $this->whereRaw("slug REGEXP '^{$slug}(-[0-9]*)?$'")->count();
-
-        return $matchs;
-    }
 
     // Relations
 
