@@ -102,8 +102,6 @@ class ProductController extends Controller
         $product = $this->product->findOrFail($product); //findOrFail caso produto não exista
         $categories = \App\Category::all(['id', 'name']);
 
-        dd($product->slug);
-
         return view('admin.products.edit', compact('product', 'categories'));
     }
 
