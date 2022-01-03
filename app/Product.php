@@ -18,6 +18,11 @@ class Product extends Model
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
+    // Accessor = full_name -> getFullNameAttribute = exemplo de nomeação
+    public function getThumbAttribute() // Accessor
+    {
+        return $this->photos->first()->image;
+    }
 
     public function store() // rel 1:N
     {

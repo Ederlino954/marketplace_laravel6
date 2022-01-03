@@ -13,7 +13,7 @@ class ProductPhotoController extends Controller
     {
         $photoName = $request->get('photoName');
 
-        // Removo dos arquivos
+        // Removo os arquivos
         if (Storage::disk('public')->exists($photoName)) {
             Storage::disk('public')->delete($photoName);
         }
@@ -29,6 +29,6 @@ class ProductPhotoController extends Controller
         return redirect()->route('admin.products.edit', ['product' => $productId]);
     }
 
-    
+
 
 }
