@@ -58,7 +58,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request) // procesamento da criação //ProductRequest = regras de validaões sendo usadas
+    public function store(ProductRequest $request) // procesamento da criação //ProductRequest = regras de validações sendo usadas
     {
         $data = $request->all();
         $categories = $request->get('categories', null);
@@ -101,6 +101,8 @@ class ProductController extends Controller
     {
         $product = $this->product->findOrFail($product); //findOrFail caso produto não exista
         $categories = \App\Category::all(['id', 'name']);
+
+        dd($product->slug);
 
         return view('admin.products.edit', compact('product', 'categories'));
     }

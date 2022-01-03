@@ -3,26 +3,35 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
+// use Spatie\Sluggable\HasSlug;
+// use Spatie\Sluggable\SlugOptions;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
-    use HasSlug;
+    // use HasSlug;
 
     protected $fillable = ['name', 'description', 'body', 'price', 'slug'];
 
-    public function getSlugOptions() : SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('name')
-            ->saveSlugsTo('slug');
-    }
+    // public function getSlugOptions() : SlugOptions
+    // {
+    //     return SlugOptions::create()
+    //         ->generateSlugsFrom('name')
+    //         ->saveSlugsTo('slug');
+    // }
     // Accessor = full_name -> getFullNameAttribute = exemplo de nomeação
     public function getThumbAttribute() // Accessor
     {
         return $this->photos->first()->image;
     }
+// ->slug = 123232
+    public function setNameAttribute($value) // mutators
+    {
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
+    }
+
+    // Relations
 
     public function store() // rel 1:N
     {
