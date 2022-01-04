@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Payment\PagSeguro\Boleto;
 use App\Payment\PagSeguro\CreditCard;
 use App\Payment\PagSeguro\Notification;
 use App\Store;
@@ -41,6 +42,8 @@ class CheckoutController extends Controller
     {
         try {
 
+            // TO-DO: Validar se tipo de pagamento enviado é válido e aceiot internamente...
+
             $dataPost = $request->all();
             $user = auth()->user();
             $cartItems = session()->get('cart');
@@ -48,8 +51,16 @@ class CheckoutController extends Controller
             $reference = Uuid::uuid4();
             // $reference = 'XPTO';
 
-            $creditCardPayment = new CreditCard($cartItems, $user, $dataPost, $reference);
-            $result = $creditCardPayment->doPayment();
+            $payment = $dataPost['paymentType'] == 'BOLETO'
+                ? new Boleto($cartItems, $user, $reference, $dataPost['hash'] )
+                : new CreditCard($cartItems, $user, $dataPost, $reference);
+
+            $result = $payment->doPayment();
+
+            return response()->json([
+                'code' => $result->getCode(),
+                'boleto_link' => $result->getPaymentLink()
+            ]);
 
             $userOrder = [
                 'reference' => $reference,
