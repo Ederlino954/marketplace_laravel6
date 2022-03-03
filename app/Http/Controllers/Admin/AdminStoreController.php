@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\http\requests\StoreRequest; // regras de validações
+use App\Http\Requests\StoreRequestUpdate;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Facades\Storage;
 
-class StoreController extends Controller
+class AdminStoreController extends Controller
 {
     use UploadTrait;
 
@@ -32,7 +33,7 @@ class StoreController extends Controller
         return view('admin.stores.create', compact('users'));
     }
 
-    public function store(StoreRequest $request) //StoreRequest = regras de validaões sendo usadas
+    public function store(StoreRequest $request) //StoreRequest = regras de validações sendo usadas
     {
         $data = $request->all();
         $user = auth()->user();
@@ -54,7 +55,7 @@ class StoreController extends Controller
         return view('admin.stores.edit', compact('store'));
     }
 
-    public function update(StoreRequest $request, $store) //StoreRequest = regras de validaões sendo usadas
+    public function update(StoreRequestUpdate $request, $store) //StoreRequest = regras de validaões sendo usadas
     {
         $data = $request->all();
         $store = \App\Store::find($store);

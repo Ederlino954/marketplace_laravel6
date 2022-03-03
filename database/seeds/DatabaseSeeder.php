@@ -11,6 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UsersTableSeeder::class);
+        $this->call(UsersTableSeeder::class); // CRIA LOJA COM USUARIOS
+        // $this->call(StoreTableSeeder::class); 
+        // USAR QUANDO ESTIVER JÁ CRIADO AS LOJAS,
+        // ELA CRIA PRODUTOS ASSOCIADOS A MESMA
     }
 }

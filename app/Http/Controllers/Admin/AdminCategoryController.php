@@ -5,12 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\CategoryRequestUpdate;
+use App\Classes\Enc;
 
 class AdminCategoryController extends Controller
 {
-	/**
-	 * @var Category
-	 */
 	private $category;
 
 	public function __construct(Category $category)
@@ -18,11 +17,6 @@ class AdminCategoryController extends Controller
 		$this->category = $category;
 	}
 
-	/**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
 	    $categories = $this->category->paginate(10);
@@ -30,23 +24,12 @@ class AdminCategoryController extends Controller
 	    return view('admin.categories.index', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
 	    return view('admin.categories.create');
     }
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param CategoryRequest $request
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
+
     public function store(CategoryRequest $request)
     {
 	    $data = $request->all();
@@ -57,39 +40,23 @@ class AdminCategoryController extends Controller
 	    return redirect()->route('admin.categories.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($category)
+    public function edit($idEncProduct)
     {
+        // dd($idEncProduct);
+        $category = Enc::desencriptar($idEncProduct);
+        // dd($category);
 	    $category = $this->category->findOrFail($category);
 
 	    return view('admin.categories.edit', compact('category'));
     }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param CategoryRequest $request
-	 * @param  int $category
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-    public function update(CategoryRequest $request, $category)
+    public function update(CategoryRequestUpdate $request, $category)
     {
 	    $data = $request->all();
 
@@ -100,14 +67,12 @@ class AdminCategoryController extends Controller
 	    return redirect()->route('admin.categories.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($category)
+    public function destroy($idEncProduct)
     {
+        // dd($idEncProduct);
+        $category = Enc::desencriptar($idEncProduct);
+        // dd($category);
+
 	    $category = $this->category->find($category);
 	    $category->delete();
 

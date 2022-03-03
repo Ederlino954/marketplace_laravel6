@@ -37,7 +37,7 @@
 
         </div>
 
-        <div class="col-12 mb-4">
+        <div class="col-12 mb-4" style="display: none">
 
             {{$products->links()}}
 

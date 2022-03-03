@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Request;
 
-class StoreRequest extends FormRequest
+class ProductRequestUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +25,11 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'         => ['required', 'unique:stores'],
-            'description'  => 'required|min:10',
-            'phone'        => 'required',
-            'mobile_phone' => 'required',
-            'logo'         => 'image'
+            'name'         => 'required',
+            'description'  => 'required|min:30',
+            'body'         => 'required',
+            'price'        => 'required',
+            'photos.*'        => 'image'
         ];
     }
 
@@ -37,8 +38,7 @@ class StoreRequest extends FormRequest
         return [
             'required' => 'Este campo é obrigatório',
             'min' => 'Campo deve ter no mínimo :min caracteres',
-            'image' => 'Arquivo não é uma imagem válida',
-            'unique' => 'Loja com nome existente!',
+            'image' => 'Arquivo não é uma imagem válida'
         ];
     }
 }

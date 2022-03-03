@@ -1,13 +1,17 @@
 @extends('layouts.front')
 
-    @section('stylesheets')
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    @endsection
+@section('stylesheets')
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+@endsection
 
-    @section('content')
+@section('content')
 
     <div class="container">
-
+        <div class="row bt-5">
+            <div class="col-12">
+                <div class="msg"></div>
+            </div>
+        </div>
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -65,7 +69,7 @@
                             <div class="col-md-12 installments form-group"></div>
                         </div>
 
-                        <button class="btn btn-success btn-lg processCheckout" data-payment-type="CREDICARD">Efetuar Pagamento</button>
+                        <button class="btn btn-success btn-lg processCheckout"  data-payment-type="CREDITCARD">Efetuar Pagamento</button>
                     </form>
                 </div>
                 <!-- Fim Cartão de Crédito Conteúdo Tab-->
@@ -83,25 +87,24 @@
             </div>
         </div>
 
+
     </div>
 
-    @endsection
+@endsection
 
-    @section('scripts')
-        <script src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-        {{-- <script src="{{ asset('assets/js/jquery.ajax.js') }}"></script> --}}
+@section('scripts')
+    <script src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-        <script>
-            const sessionId = '{{session()->get('pagseguro_session_code')}}';
-            const urlThanks = '{{route('checkout.thanks')}}';
-            const urlProccess = '{{route("checkout.proccess")}}';
-            const amountTransaction = '{{$cartItems}}';
-            const csrf = '{{csrf_token()}}';
+    <script>
+        const sessionId = '{{session()->get('pagseguro_session_code')}}';
+        const urlThanks = '{{route('checkout.thanks')}}';
+        const urlProccess = '{{route("checkout.proccess")}}';
+        const amoutTransaction = '{{$cartItems}}';
+        const csrf = '{{csrf_token()}}';
 
-            PagSeguroDirectPayment.setSessionId(sessionId);
-        </script>
-
-        <script src="{{ asset('js/pagseguro_functions.js') }}"></script>
-        <script src="{{ asset('js/pagseguro_events.js') }}"></script>
-    @endsection
+        PagSeguroDirectPayment.setSessionId(sessionId);
+    </script>
+    <script src="{{asset('js/pagseguro_functions.js')}}"></script>
+    <script src="{{asset('js/pagseguro_events.js')}}"></script>
+@endsection

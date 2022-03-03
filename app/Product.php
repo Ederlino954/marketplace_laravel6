@@ -9,6 +9,7 @@ class Product extends Model
 {
     use Slug;
 
+    // protected $fillable = ['id','name', 'description', 'body', 'price', 'slug'];
     protected $fillable = ['name', 'description', 'body', 'price', 'slug'];
 
     // Accessor = full_name -> getFullNameAttribute = exemplo de nomeação

@@ -210,8 +210,8 @@ Route::group(['middleware' => ['auth', 'access.control.store.admin']], function 
 
         // });
 
-        Route::resource('stores', 'StoreController');
-        Route::resource('products', 'ProductController');
+        Route::resource('stores', 'AdminStoreController');
+        Route::resource('products', 'AdminProductController');
         Route::resource('categories', 'AdminCategoryController');
 
         Route::post('photos/remove', 'ProductPhotoController@removePhoto')->name('photo.remove');

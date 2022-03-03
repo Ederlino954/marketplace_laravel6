@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Request;
 
 class ProductRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'         => 'required',
+            'name'         => ['required', 'unique:products'],
             'description'  => 'required|min:30',
             'body'         => 'required',
             'price'        => 'required',
@@ -37,7 +38,8 @@ class ProductRequest extends FormRequest
         return [
             'required' => 'Este campo é obrigatório',
             'min' => 'Campo deve ter no mínimo :min caracteres',
-            'image' => 'Arquivo não é uma imagem válida'
+            'image' => 'Arquivo não é uma imagem válida',
+            'unique' => 'Produto com nome existente!',
         ];
     }
 }

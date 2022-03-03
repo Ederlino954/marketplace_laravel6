@@ -30,32 +30,46 @@
                 <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
             </li>
 
+
+
             @foreach ($categories as $category)
                 <li class="nav-item @if(request()->is('category/' . $category->slug)) active @endif">
                     <a class="nav-link" href="{{route('category.single', ['slug' => $category->slug ])}}">{{ $category->name }}</span></a>
                 </li>
             @endforeach
+
+
         </ul>
 
     {{-- @auth --}}
-
-                {{-- <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav mr-auto">
                     @auth
-                        <li class="nav-item @if(request()->is('admin/stores*')) active @endif">
-                            <a class="nav-link" href="{{route('admin.stores.index')}}">Lojas <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item @if(request()->is('admin/products*')) active @endif">
-                            <a class="nav-link" href="{{route('admin.products.index')}}">Produtos</a>
-                        </li>
-                        <li class="nav-item @if(request()->is('admin/categories*')) active @endif">
-                            <a class="nav-link" href="{{route('admin.categories.index')}}">Categorias</a>
-                        </li>
+                        @php
+                            $access = auth()->user()->role;
+                        @endphp
+
+                        @if ($access == 'ROLE_OWNER')
+                            <li class="nav-item @if(request()->is('admin/stores*')) active @endif">
+                                <a class="nav-link" href="{{route('admin.stores.index')}}">Acesso ADM <span class="sr-only">(current)</span></a>
+                            </li>
+                            {{-- <li class="nav-item @if(request()->is('admin/products*')) active @endif">
+                                <a class="nav-link" href="{{route('admin.products.index')}}">Produtos</a>
+                            </li>
+                            <li class="nav-item @if(request()->is('admin/categories*')) active @endif">
+                                <a class="nav-link" href="{{route('admin.categories.index')}}">Categorias</a>
+                            </li> --}}
+                        @endif
                     @endauth
-                </ul> --}}
+                </ul>
 
                 <div class="my-2 my-lg-0">
 
                     <ul class="navbar-nav mr-auto">
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('login')}}">Login <span class="sr-only"></span></a>
+                            </li>
+                        @endguest
                         @auth
                             <li class="nav-item">
                                 <a  class="nav-link"  href="#" onclick="event.preventDefault();
@@ -65,8 +79,10 @@
                                     @csrf
                                 </form>
                             </li>
+
                             <li class="nav-item">
                                 <span class="nav-link">{{auth()->user()->name}}</span>
+                                {{-- <span class="nav-link">{{auth()->user()->role}}</span> --}}
                             </li>
 
 

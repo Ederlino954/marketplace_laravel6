@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+    @php
+        $enc = new App\Classes\Enc();
+    @endphp
+
     @section('content')
 
         <a href="{{ route('admin.products.create') }}" class="btn btn-lg btn-success">Criar Produto</a>
@@ -17,14 +21,16 @@
             <tbody>
                 @foreach ($products as $p)
                     <tr>
+                        {{-- {{dd($p->id)}} --}}
                         <td>{{$p->id}}</td>
                         <td>{{$p->name}}</td>
                         <td>R$ {{number_format($p->price, 2, ',', '.')}}</td>
                         <td>{{$p->store->name}}</td>
                         <td>
                             <div class="btn-group">
-                                <a href="{{ route('admin.products.edit', ['product' => $p->id] )}}" class="btn btn-sm btn-primary">EDITAR</a>
-                                <form action="{{ route('admin.products.destroy', ['product' => $p->id] )}}" method="post" >
+                                {{-- <a href="{{ route('admin.products.edit', ['product' => $p->id] )}}" class="btn btn-sm btn-primary">EDITAR</a> --}}
+                                <a href="{{ route('admin.products.edit', [$enc->encriptar($p->id)] )}}" class="btn btn-sm btn-primary">EDITAR</a>
+                                <form action="{{ route('admin.products.destroy', [$enc->encriptar($p->id)] )}}" method="post" >
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" onclick="return confirm('Deseja realmente remover este produto?')"  class="btn btn-sm btn-danger">REMOVER</button>

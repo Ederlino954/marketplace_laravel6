@@ -15,7 +15,7 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('store_id');
+            $table->unsignedBigInteger('store_id')->nullable();
 
             $table->string('name');
             $table->string('description');
@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('SET NULL');
         });
     }
 
