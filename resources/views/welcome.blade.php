@@ -4,7 +4,7 @@
 
         <div class="row front">
             @foreach ($products as $key => $product)
-                <div class="col-md-4 ">
+                <div class="col-md-4 card shadow-lg p-3 mb-5 bg-body rounded ">
                     <div class="card" style="width: 100%;">
                         @if ($product->photos->count())
                             <img src="{{asset('storage/' . $product->thumb)}}" alt="" class="card-img-top">
@@ -25,8 +25,8 @@
                             </a>
                         </div>
                     </div>
-                    <hr>
-                    <hr>
+                    {{-- <hr> --}}
+                    {{-- <hr> --}}
                 </div>
 
                 @if (($key + 1) % 3 == 0) </div> <div class="row front">   @endif
@@ -44,14 +44,14 @@
         </div>
 
 
-        <div class="row">
-            <div class="col-12">
-                <hr>
+        <div class="row " >
+            <div class="col-12 shadow-lg p-3 mb-5 bg-body rounded ">
+                {{-- <hr> --}}
                 <h2>Lojas Destaque</h2>
-                <hr>
+                {{-- <hr> --}}
             </div>
             @foreach ($stores as $store)
-                <div class="col-4">
+                <div class="col-4 shadow p-3 mb-5 bg-body rounded">
                     @if ($store->logo)
                         <img src="{{ asset('storage/' . $store->logo) }}" alt="Logo da Loja {{ $store->name }}" class="img-fluid">
                     @else
@@ -67,9 +67,10 @@
             @endforeach
         </div>
 
-        <div class="col-12">
+        <div class="col-12 mb-5">
             <hr>
             {{$stores->links()}}
+            <hr class="mb-5">
         </div>
 
 

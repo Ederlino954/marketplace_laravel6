@@ -69,7 +69,11 @@
                             <div class="col-md-12 installments form-group"></div>
                         </div>
 
+<<<<<<< HEAD
                         <button class="btn btn-success btn-lg processCheckout"  data-payment-type="CREDITCARD">Efetuar Pagamento</button>
+=======
+                        <button class="btn btn-success btn-lg processCheckout">Efetuar Pagamento</button>
+>>>>>>> parent of d6bd81c ( 211 - Modificando JS Front)
                     </form>
                 </div>
                 <!-- Fim Cartão de Crédito Conteúdo Tab-->
@@ -80,13 +84,18 @@
                 <div class="row">
                     <div class="col-12">
                         <h2>Pagar com Boleto</h2>
-                        <button class="btn btn-success btn-lg processCheckout" data-payment-type="BOLETO">Emitir Boleto</button>
+                        <button class="btn btn-success btn-lg">Emitir Boleto</button>
                     </div>
                 </div>
 
             </div>
         </div>
 
+<<<<<<< HEAD
+=======
+
+    </div>
+>>>>>>> parent of d6bd81c ( 211 - Modificando JS Front)
 
     </div>
 

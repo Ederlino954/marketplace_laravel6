@@ -22,17 +22,17 @@
             @auth
 
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item @if (request()->is('admin/orders*')) active @endif">
+                    <li class="nav-item @if (request()->is('admin/orders*')) active btn-outline-primary card @endif">
                     <a class="nav-link" href="{{ route('admin.orders.my') }}">Meus pedidos</span></a>
                     </li>
-                    <li class="nav-item @if (request()->is('admin/stores*')) active @endif">
+                    <li class="nav-item @if (request()->is('admin/stores*')) active btn-outline-primary card @endif">
                     <a class="nav-link" href="{{ route('admin.stores.index') }}">Loja <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item @if (request()->is('admin/products*')) active @endif">
+                    <li class="nav-item @if (request()->is('admin/products*')) active btn-outline-primary card @endif">
                     <a class="nav-link" href="{{ route('admin.products.index') }}">Produtos</a>
                     </li>
-                    <li class="nav-item @if (request()->is('admin/categories*')) active @endif">
-                    <a class="nav-link" href="{{ route('admin.categories.index') }}">Categories</a>
+                    <li class="nav-item @if (request()->is('admin/categories*')) active  btn-outline-primary card @endif">
+                    <a class="nav-link" href="{{ route('admin.categories.index') }}">Categorias</a>
                     </li>
                 </ul>
                 <div class=" my-2 my-lg-0">
@@ -64,7 +64,7 @@
     </nav>
 
     <div class="container">
-        @include('flash::message')
+        @include('flash::message') {{-- flash pacote de manessagens --}}
         @yield('content')
     </div>
 

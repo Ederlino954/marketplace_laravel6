@@ -12,6 +12,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+
+        // copiado de factories para teste de seeder
         // DB::table('users')->insert(
         //     [
         //         'name' => 'Administrator',
@@ -22,7 +24,7 @@ class UsersTableSeeder extends Seeder
         //     ]
         // );
 
-        factory(\App\User::class, 40)->create()->each(function($user){
+        factory(\App\User::class, 40)->create()->each(function($user){ // criando usuarios com as lojas associadas
             $user->store()->save(factory(\App\Store::class)->make());
         });
     }

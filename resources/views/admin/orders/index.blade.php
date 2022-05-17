@@ -12,7 +12,7 @@
 
                 @forelse ($orders as $key => $order)
 
-                    <div class="card">
+                    <div class="card shadow-lg p-3 mb-3 mt-3 bg-body rounded">
                         <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
                             <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse{{$key}}" aria-expanded="true" aria-controls="collapseOne">

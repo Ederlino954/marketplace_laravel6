@@ -8,39 +8,42 @@
 
         <a href="{{ route('admin.products.create') }}" class="btn btn-lg btn-success">Criar Produto</a>
 
-        <Table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nome</th>
-                    <th>Preço</th>
-                    <th>Loja</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($products as $p)
+        <div class="card shadow-lg p-3 mb-5 mt-3 bg-body rounded">
+            <Table class="table table-striped ">
+                <thead class="">
                     <tr>
-                        {{-- {{dd($p->id)}} --}}
-                        <td>{{$p->id}}</td>
-                        <td>{{$p->name}}</td>
-                        <td>R$ {{number_format($p->price, 2, ',', '.')}}</td>
-                        <td>{{$p->store->name}}</td>
-                        <td>
-                            <div class="btn-group">
-                                {{-- <a href="{{ route('admin.products.edit', ['product' => $p->id] )}}" class="btn btn-sm btn-primary">EDITAR</a> --}}
-                                <a href="{{ route('admin.products.edit', [$enc->encriptar($p->id)] )}}" class="btn btn-sm btn-primary">EDITAR</a>
-                                <form action="{{ route('admin.products.destroy', [$enc->encriptar($p->id)] )}}" method="post" >
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" onclick="return confirm('Deseja realmente remover este produto?')"  class="btn btn-sm btn-danger">REMOVER</button>
-                                </form>
-                            </div>
-                        </td>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Preço</th>
+                        <th>Loja</th>
+                        <th>Ações</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </Table>
+                </thead>
+                <tbody>
+                    @foreach ($products as $p)
+                        <tr class="">
+                            {{-- {{dd($p->id)}} --}}
+                            <td>{{$p->id}}</td>
+                            <td>{{$p->name}}</td>
+                            <td>R$ {{number_format($p->price, 2, ',', '.')}}</td>
+                            <td>{{$p->store->name}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    {{-- <a href="{{ route('admin.products.edit', ['product' => $p->id] )}}" class="btn btn-sm btn-primary">EDITAR</a> --}}
+                                    <a href="{{ route('admin.products.edit', [$enc->encriptar($p->id)] )}}" class="btn btn-sm btn-primary">EDITAR</a>
+                                    <form action="{{ route('admin.products.destroy', [$enc->encriptar($p->id)] )}}" method="post" >
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" onclick="return confirm('Deseja realmente remover este produto?')"  class="btn btn-sm btn-danger">REMOVER</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </Table>
+
+        </div>
 
         {{$products->links()}}
 

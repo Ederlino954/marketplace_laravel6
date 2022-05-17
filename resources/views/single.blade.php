@@ -20,7 +20,7 @@
                     <img src="{{asset('assets/img/no-photo.jpg')}}" alt="" class="card-img-top">
                 @endif
             </div>
-            <div class="col-6">
+            <div class="col-6 ">
                 <div class="col-md-12">
                     <h2>{{$product->name}}</h2>
                     <p>

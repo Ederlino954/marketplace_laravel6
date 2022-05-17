@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 // -----INÍCIO ROTAS DE TESTE-------//
 Route::get('/model', function () {
 
+    // active record
+
     // --------------------TESTES-----------------------------//
 
 
@@ -52,13 +54,15 @@ Route::get('/model', function () {
     // return \App\User::where('name', 'Aiden Sawayn')->get(); // select * from where name = 'Margarita Larkin'
     // return \App\User::where('name', 'Leora Prohaska')->first(); // retorna somente o primeiro resultado
 
-    // return \App\User::paginate(10); // Paginar dados com laravel
+    // return \App\User::paginate(10); // Paginar dados com laravel retornando já em JSON
 
-    //------------------------------------------------------
+    //------------------------------------------------------------------------------------------
+
+    // 26.mass assignment e Mass update/////////////////////////////////////////////////////////////////////////////////
 
     // Mass Assigment - Atribuição em massa
 
-    // $user = \App\User::create([
+    // $user = \App\User::create([ // esper o arrays como parametro
     //     'name' => 'Ederlino',
     //     'email' => 'ederlino@gmail.com',
     //     'password' => bcrypt('12345678')
@@ -74,21 +78,26 @@ Route::get('/model', function () {
     // dd($user);
 
 
-    // ------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------
+    // 36. queries com relações///////////////////////////////////////////////////////////////////////////////////////
+
     // pegar a loja de um usuário!
     // $user = \App\User::find(4);
 
-    // return $user->store; // o objeto único  (Store) N:N collection de dados(objeto)
+    // return $user->store; // o objeto único  (Store) 1:1 collection de dados(objeto)
 
     // dd($user->store()); // instancia de hasOne
 
-    // dd($user->store()->count()); //  contando as lojas do usuario
+    // dd($user->store()->count()); //  instancia de hasOne posso usar count() e outros metodos referentes
     // -------------------------------------
 
     // Pegar os produtos de uma loja
     // $loja = \App\Store::find(1);
 
-    // return $loja->products;
+    // return $loja->products /// quando chama em atributo o laravel ja retorna de forma resumida para ser exibida
+    // return $loja->products() // chamado em metodo tem mais opções para se fazer a tratativa
+
+    // return $loja->products; // retorna collection de produtos
     // return $loja->products()->count(); // colletion return
     // return $loja->products()->where('id', 1)->get();
     // dd($loja->products());  // retorn hasMany
@@ -98,11 +107,14 @@ Route::get('/model', function () {
     // $categoria = \App\Category::find(1);
     // $categoria->products;
 
-    /////============================//=====================================//=======
+    /////============================//=====================================//============================================
+
+    // 37. Inserindo relações///////////////////////////////////////////////////////////////////////////////
 
     // criar uma loja para um usuário
+
     // $user = \App\User::find(10);
-    // $store = $user->store()->create([
+    // $store = $user->store()->create([ // creta baseado no mass assignment
     //     'name' => 'Loja teste',
     //     'description' => 'Loja teste de produtos de informática',
     //     'mobile_phone' => 'xx-xxxx-xxxx',
@@ -114,7 +126,6 @@ Route::get('/model', function () {
     // ------------------------------------------------------------------------
 
     // // criar um produto para uma loja
-
     // $store = \App\Store::find(41);
     // $product = $store->products()->create([
     //     'name' => 'Notebook Dell',
@@ -146,6 +157,8 @@ Route::get('/model', function () {
     // ]);
 
     // return \App\Category::all();
+
+    // --------------------------------------------------------------------------------
 
     // Adicionar um produto para uma categoria ou vice versa
 

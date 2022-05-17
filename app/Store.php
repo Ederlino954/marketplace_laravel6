@@ -9,6 +9,8 @@ use App\Traits\Slug;
 
 class Store extends Model
 {
+    // protected $table = 'lojas'; // caso queira mudar o nome padrão da tabela
+
     use Slug;
 
     protected $fillable = ['name', 'description', 'phone', 'mobile_phone', 'slug', 'logo'];
@@ -48,4 +50,4 @@ class Store extends Model
 // Store -> stores = procura por plural no banco de dados
 // stores
 
-// product -> products
+// product -> products = procura por plural no banco de dados

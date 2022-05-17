@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Payment\PagSeguro\Boleto;
 use App\Payment\PagSeguro\CreditCard;
 use App\Payment\PagSeguro\Notification;
 use App\Store;
@@ -35,6 +34,7 @@ class CheckoutController extends Controller
     {
     	try {
 
+<<<<<<< HEAD
     	    //TO-DO: validar se tipo de pagamento enviado é válido e aceito internamente...
 
 		    $dataPost = $request->all();
@@ -57,6 +57,17 @@ class CheckoutController extends Controller
 //                'type' => $dataPost['paymentType'],
 //                'link_boleto' => $result->getPaymentLink()
 		    ];
+=======
+            $dataPost = $request->all();
+            $user = auth()->user();
+            $cartItems = session()->get('cart');
+            $stores = array_unique(array_column($cartItems, 'store_id'));
+            $reference = Uuid::uuid4();
+            // $reference = 'XPTO';
+
+            $creditCardPayment = new CreditCard($cartItems, $user, $dataPost, $reference);
+            $result = $creditCardPayment->doPayment();
+>>>>>>> parent of d6bd81c ( 211 - Modificando JS Front)
 
 		    $userOrder = $user->orders()->create($userOrder);
 

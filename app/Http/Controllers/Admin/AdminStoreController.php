@@ -42,7 +42,7 @@ class AdminStoreController extends Controller
             $data['logo'] = $this->imageUpload($request->file('logo'));
         }
 
-        $store = $user->store()->create($data);
+        $store = $user->store()->create($data); // mass assignment
 
         flash('Loja Criada com sucesso!')->success();
         return redirect()->route('admin.stores.index');
@@ -55,7 +55,7 @@ class AdminStoreController extends Controller
         return view('admin.stores.edit', compact('store'));
     }
 
-    public function update(StoreRequestUpdate $request, $store) //StoreRequest = regras de validaões sendo usadas
+    public function update(StoreRequestUpdate $request, $store) //StoreRequest = regras de validaões sendo usadas // atualiza
     {
         $data = $request->all();
         $store = \App\Store::find($store);
@@ -68,8 +68,7 @@ class AdminStoreController extends Controller
             $data['logo'] = $this->imageUpload($request->file('logo'));
         }
 
-
-        $store->update($data);
+        $store->update($data); // mass assignment
 
         flash('Loja Atualizada com sucesso!')->success();
         return redirect()->route('admin.stores.index');
@@ -78,7 +77,7 @@ class AdminStoreController extends Controller
     public function destroy($store)
     {
         $store = \App\Store::find($store);
-        $store->delete();
+        $store->delete(); // para deletar a loja os productos tem que estar com a opção de deleção CASCADE habilitada no banco de dados
 
         flash('Loja Removida com sucesso!')->success();
         return redirect()->route('admin.stores.index');

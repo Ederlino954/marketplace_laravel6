@@ -8,6 +8,8 @@
     <title>Marketplace L6</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    {{-- para testar --}}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <style>
         .front.row {
             margin-bottom: 40px;
@@ -24,23 +26,18 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
         <ul class="navbar-nav mr-auto">
             <li class="nav-item @if(request()->is('/')) active @endif">
                 <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
             </li>
-
-
-
+            {{-- carregamento de categorias atraves de view composer --}}
+            {{-- {{dd($categories->count())}}; fazer teste depois--}}
             @foreach ($categories as $category)
                 <li class="nav-item @if(request()->is('category/' . $category->slug)) active @endif">
                     <a class="nav-link" href="{{route('category.single', ['slug' => $category->slug ])}}">{{ $category->name }}</span></a>
                 </li>
             @endforeach
-
-
         </ul>
-
     {{-- @auth --}}
                 <ul class="navbar-nav mr-auto">
                     @auth
@@ -49,7 +46,7 @@
                         @endphp
 
                         @if ($access == 'ROLE_OWNER')
-                            <li class="nav-item @if(request()->is('admin/stores*')) active @endif">
+                            <li class="nav-item btn btn-outline-success @if(request()->is('admin/stores*')) active @endif">
                                 <a class="nav-link" href="{{route('admin.stores.index')}}">Acesso ADM <span class="sr-only">(current)</span></a>
                             </li>
                             {{-- <li class="nav-item @if(request()->is('admin/products*')) active @endif">
@@ -109,7 +106,7 @@
 </nav>
 
 <div class="container">
-    @include('flash::message')
+    @include('flash::message')  {{-- flash pacote de manessagens --}}
     @yield('content')
 </div>
 <script src="{{ asset('js/app.js') }}"></script>

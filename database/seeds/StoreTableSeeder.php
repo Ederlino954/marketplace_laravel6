@@ -11,7 +11,7 @@ class StoreTableSeeder extends Seeder
      */
     public function run()
     {
-        $stores = \App\Store::all(); // ja existe a loja buscando-as e fazendo o loop 
+        $stores = \App\Store::all(); // ja existe a loja buscando-as e fazendo o loop
 
         foreach ($stores as $store)
         {

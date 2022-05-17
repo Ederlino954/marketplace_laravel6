@@ -106,7 +106,7 @@ class AdminProductController extends Controller
     {
         // dd($idEncProduct);
         $product = Enc::desencriptar($idEncProduct);
-       
+
         $product = $this->product->find($product);
         $product->delete();
 

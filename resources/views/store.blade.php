@@ -30,7 +30,7 @@
                 <hr>
             </div>
             @forelse ($store->products as $key => $product)
-                <div class="col-md-4 ">
+                <div class="col-md-4">
                     <div class="card" style="width: 105%;">
                         @if ($product->photos->count())
                             <img src="{{asset('storage/' . $product->photos->first()->image)}}" alt="" class="card-img-top">
